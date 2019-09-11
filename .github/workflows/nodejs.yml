@@ -1,3 +1,7 @@
+name: Node CI
+
+on: [push]
+
 jobs:
   build:
     name: Build Node v${{ matrix.node-version }} ${{ matrix.os.name }}
