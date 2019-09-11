@@ -4,30 +4,31 @@ on: [push]
 
 jobs:
   build:
-    name: Build v${{ matrix.node-version }} ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node-version: [10, 12]
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os:
+        - name: Ubuntu
+          version: ubuntu-latest
+        - name: MacOS
+          version: macOS-latest
+        - name: Windows
+          version: windows-latest
 
     steps:
     - uses: actions/checkout@v1
-    - name: Node.js v${{ matrix.node-version }}
+    - name: ${{ matrix.os }} : Node.js v${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install
       run: npm install
-      env:
-        CI: true
     - name: Build
       run: npm build --if-present
       env:
         CI: true
     - name: Test
       run: npm test
-      env:
-        CI: true
