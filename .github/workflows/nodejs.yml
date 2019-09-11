@@ -1,11 +1,8 @@
-name: Node CI
-
-on: [push]
-
 jobs:
   build:
+    name: Build Node v${{ matrix.node-version }} ${{ matrix.os.name }}
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os.version }}
 
     strategy:
       matrix:
@@ -20,7 +17,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: ${{ matrix.os }} : Node.js v${{ matrix.node-version }}
+    - name: Node.js v${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
