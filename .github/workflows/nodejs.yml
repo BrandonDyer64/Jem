@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build:
+    name: Build v${{ matrix.node-version }} ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
 
@@ -14,7 +15,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: "${{ matrix.os }} : Node.js v${{ matrix.node-version }}"
+    - name: Node.js v${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
